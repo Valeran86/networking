@@ -27,9 +27,10 @@ import static java.lang.System.out;
 * */
 
 public class Server extends ChatBase {
-    private static final Map<String, List<Message>> messages = new ConcurrentHashMap<>();
+    public static final Map<String, List<Message>> messages = new ConcurrentHashMap<>();
     private static final Queue<Message> notifyQueue = new LinkedBlockingQueue<>();
     private static final Queue<Message> messagesQueue = new LinkedBlockingQueue<>();
+    public static final Queue<String> activeUsers = new LinkedBlockingQueue<>();
 
     public static void main( String[] args ) {
         port = ChatBase.getPort(args);
@@ -53,6 +54,7 @@ public class Server extends ChatBase {
                 out.println( "messagesQueue\n" + messagesQueue + "\n" );
 
                 ChatThread teller = new ChatThread( client, messagesQueue, notifyQueue );
+
                 out.println("Start talking...");
                 teller.start();
             }

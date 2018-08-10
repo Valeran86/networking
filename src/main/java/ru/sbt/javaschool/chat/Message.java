@@ -15,4 +15,5 @@ public class Message implements Serializable {
     private String source;
     private String target;
     private String text;
+    private String command;
 }
